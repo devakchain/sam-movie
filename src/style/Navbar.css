@@ -1,0 +1,41 @@
+.navbar {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.navbar > h1 {
+  font-size: 30px;
+  color: teal;
+}
+
+.navbar_links {
+  display: flex;
+}
+
+.navbar_links > a {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  padding: 0 15px;
+}
+
+.navbar_links a {
+  transition: all 0.1s ease-in-out;
+}
+
+.navbar_links a.active {
+  font-weight: 700;
+  border: 1px solid teal;
+  padding: 10px;
+  margin: 0px 10px;
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+}
