@@ -1,7 +1,8 @@
 # See Live website
-https://travel-list1099.netlify.app/
+https://sam-move.netlify.app/
 
 ---
+Please note it is not yet responsive I will make it soon
 
 ## ✅ 2. **Movie Listing App (Intermediate Project)**
 
