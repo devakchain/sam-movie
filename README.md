@@ -17,8 +17,7 @@ An intermediate-level React app that fetches movie data from a public API and le
 - Search functionality with auto-suggestions
 - Loading skeleton and error handling
 - Pagination for movie results
-- Dark/Light Mode toggle
-- Responsive design
+- Responsive design stiil not 100%
 
 ## 🧠 What I Learned
 - Fetching data from APIs using `fetch` and `axios`
@@ -31,9 +30,6 @@ An intermediate-level React app that fetches movie data from a public API and le
 - Axios
 - CSS
 - TMDB or other public API
-
-## 📸 Screenshots
-![Movie App Screenshot](./screenshots/movie-app.png)
 
 ## 🧪 How to Run
 ```bash
