@@ -19,7 +19,7 @@ An intermediate-level React app that fetches movie data from a public API and le
 - Pagination for movie results
 - Responsive design stiil not 100%
 
-## 🧠 What I Learned
+## 🧠 What I implemented in this app
 - Fetching data from APIs using `fetch` and `axios`
 - Using `useEffect` and `useState` effectively
 - Search debouncing, filters, and conditional rendering
