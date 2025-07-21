@@ -1,71 +1,97 @@
 .movie_card {
-  width: 200px;
-  height: 300px;
-  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to bottom right, #1e293b, #0f172a);
+  border-radius: 20px;
   overflow: hidden;
-  border-radius: 10px;
-  color: #fff;
-  box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.9);
-  position: relative;
-  transition: all 0.2s ease-in-out;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  color: #f1f5f9;
+  max-width: 320px;
+  width: 100%;
 }
 
 .movie_card:hover {
-  transform: scale(1.02);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(56, 189, 248, 0.25);
 }
 
 .movie_poster {
   width: 100%;
-  height: 100%;
+  height: 200px;
   object-fit: cover;
+  transition: filter 0.3s ease;
+  filter: brightness(0.95);
+}
+
+.movie_card:hover .movie_poster {
+  filter: brightness(1.05);
 }
 
 .movie_details {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  padding: 10px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  opacity: 0;
-  transition: all 0.2s ease-in-out;
-}
-
-.movie_card:hover .movie_details {
-  opacity: 1;
+  gap: 0.6rem;
 }
 
 .movie_details_heading {
-  font-size: 16px;
-  color: #ffe400;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin: 0;
 }
 
 .movie_date_rate {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  font-size: 12px;
-  font-weight: 500;
-  margin: 5px 0;
-  color: #ffe400;
-}
-
-.card_emoji {
-  width: 20px;
-  height: 20px;
-  margin-left: 5px;
-}
-
-.movie_description {
-  font-size: 12px;
-  font-style: italic;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #94a3b8;
 }
 
 .p {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 4px;
+  font-weight: 600;
+  color: #38bdf8;
+}
+
+.card_emoji {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.movie_description {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  line-height: 1.4;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .movie_poster {
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .movie_card {
+    max-width: 100%;
+  }
+
+  .movie_poster {
+    height: 160px;
+  }
+
+  .movie_details_heading {
+    font-size: 1rem;
+  }
+
+  .movie_description {
+    font-size: 0.8rem;
+  }
 }

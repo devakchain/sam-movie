@@ -7,7 +7,7 @@ import _ from "lodash";
 
 function MovieList({ type, title }) {
   const [movies, setMovies] = useState([]);
-  const [filtersMovie, setFiltersMovie] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const [minRating, setMinRating] = useState(0);
   const [sort, setSort] = useState({
     by: "default",
@@ -15,45 +15,43 @@ function MovieList({ type, title }) {
   });
 
   useEffect(() => {
-    const getData = async () => {
+    const fetchData = async () => {
       try {
-        const data = await axios.get(
+        const response = await axios.get(
           `https://api.themoviedb.org/3/movie/${type}?api_key=6562cce4ac5e40c995ea182c43d35559`
         );
-        setMovies(data.data?.results);
-        setFiltersMovie(data.data?.results);
+        const data = response.data?.results || [];
+        setMovies(data);
+        setFilteredMovies(data);
       } catch (error) {
-        console.log(error.message);
+        console.error("Failed to fetch movies:", error.message);
       }
     };
-    getData();
+
+    fetchData();
   }, [type]);
 
-  function handleFilter(rate) {
-    if (rate === minRating) {
+  const handleFilter = (rating) => {
+    if (rating === minRating) {
       setMinRating(0);
-      setFiltersMovie(movies);
+      setFilteredMovies(movies);
     } else {
-      setMinRating(rate);
-
-      const filter = movies.filter((movie) => movie.vote_average >= rate);
-      setFiltersMovie(filter);
+      setMinRating(rating);
+      const filtered = movies.filter((movie) => movie.vote_average >= rating);
+      setFilteredMovies(filtered);
     }
-  }
+  };
 
-  function handleSort(e) {
+  const handleSort = (e) => {
     const { name, value } = e.target;
-
-    setSort((prev) => {
-      return { ...prev, [name]: value };
-    });
-  }
+    setSort((prev) => ({ ...prev, [name]: value }));
+  };
 
   useEffect(() => {
-    if (sort.by !== "default") {
-      const sortMovies = _.orderBy(filtersMovie, [sort.by], [sort.order]);
-      setFiltersMovie(sortMovies);
-    }
+    if (sort.by === "default") return;
+
+    const sorted = _.orderBy(filteredMovies, [sort.by], [sort.order]);
+    setFilteredMovies(sorted);
   }, [sort]);
 
   return (
@@ -63,25 +61,27 @@ function MovieList({ type, title }) {
 
         <div className="movie_list_fs">
           <FilterGroup
+            ratings={[8, 7, 6]}
             minRating={minRating}
             handleFilter={handleFilter}
-            ratings={[8, 7, 6]}
           />
+
           <select
             className="movie_sorting"
             name="by"
-            onChange={handleSort}
             value={sort.by}
+            onChange={handleSort}
           >
-            <option value="default">SortBy</option>
+            <option value="default">Sort By</option>
             <option value="release_date">Date</option>
             <option value="vote_average">Rating</option>
           </select>
+
           <select
             className="movie_sorting"
             name="order"
+            value={sort.order}
             onChange={handleSort}
-            value={sort.value}
           >
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
@@ -90,9 +90,9 @@ function MovieList({ type, title }) {
       </header>
 
       <div className="movie_cards">
-        {filtersMovie.map((movie) => {
-          return <MovieCard key={movie.id} movie={movie} />;
-        })}
+        {filteredMovies.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} />
+        ))}
       </div>
     </section>
   );
